@@ -15,6 +15,7 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: windows-latest
+    
     env:
       USER_NAME: yoshiask
 
@@ -47,7 +48,7 @@ jobs:
       continue-on-error: true
 
     - name: GH Nuget Add Source
-      run: nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/$USER_NAME/index.json" -UserName $USER_NAME -Password ${{ secrets.GITHUB_TOKEN  }}
+      run: nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/${{ env.$USER_NAME }}/index.json" -UserName ${{ env.$USER_NAME }} -Password ${{ secrets.GITHUB_TOKEN  }}
       
     - name: GH Nuget SetAPIKey
       run: nuget setApiKey ${{ secrets.GITHUB_TOKEN  }} -Source "GitHub"      
