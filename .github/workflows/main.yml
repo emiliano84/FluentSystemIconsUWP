@@ -28,9 +28,12 @@ jobs:
 
    # Use Nerdbank.GitVersioning to set version variables: https://github.com/AArnott/nbgv
     - name: Use Nerdbank.GitVersioning to set version variables
-      uses: aarnott/nbgv@v0.3
+      uses: dotnet/nbgv@master
+      id: nbgv
       with:
         setAllVars: true
+    
+    - run: echo 'NuGetPackageVersion ${{ steps.nbgv.outputs.NuGetPackageVersion }}'
 
     - name: Setup MSBuild.exe
       uses: warrenbuckley/Setup-MSBuild@v1
@@ -45,7 +48,7 @@ jobs:
       uses: warrenbuckley/Setup-Nuget@v1
       
     - name: Nuget Pack
-      run: nuget pack Fluent.Icons\Fluent.Icons.csproj -properties Configuration=Release;version="${{ env.NuGetPackageVersion }}"
+      run: nuget pack Fluent.Icons\Fluent.Icons.csproj -properties Configuration=Release;version="${{ NuGetPackageVersion }}"
         
     - name: Nuget SetAPIKey
       run: nuget setApiKey ${{ secrets.NUGET_KEY }}
