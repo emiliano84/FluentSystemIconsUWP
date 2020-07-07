@@ -111,3 +111,4 @@ Get the raw SVG path data for a given icon
 ```cs
 FluentSymbolIcon.AllFluentIcons[FluentSymbol.Home];
 ```
+
