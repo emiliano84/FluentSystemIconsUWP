@@ -48,7 +48,7 @@ jobs:
       uses: warrenbuckley/Setup-Nuget@v1
       
     - name: Nuget Pack
-      run: nuget pack Fluent.Icons\Fluent.Icons.csproj -properties Configuration=Release;version="${{ NuGetPackageVersion }}"
+      run: nuget pack Fluent.Icons\Fluent.Icons.csproj -properties Configuration=Release;version="${{ steps.nbgv.outputs.NuGetPackageVersion }}"
         
     - name: Nuget SetAPIKey
       run: nuget setApiKey ${{ secrets.NUGET_KEY }}
